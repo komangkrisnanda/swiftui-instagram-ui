@@ -11,8 +11,10 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0.0){
             Header()
-            
             Stories()
+            Divider()
+            PostHeader()
+            PostContent()
             Spacer()
         }
     }
@@ -82,5 +84,49 @@ struct Stories: View {
             }.padding(.horizontal, 8)
         }
         .padding(.vertical, 10)
+    }
+}
+
+struct PostHeader: View {
+    var body: some View {
+        HStack {
+            HStack{
+                Image("Avatar1")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .cornerRadius(50)
+                
+                Text("komangkrisnanda")
+                    .font(.caption)
+                    .fontWeight(.bold)
+            }
+            
+            Spacer()
+            
+            Image("More")
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 8)
+    }
+}
+
+struct PostContent: View {
+    var body: some View {
+        VStack {
+            Image("Avatar1")
+                .resizable()
+                .frame(width: .infinity)
+                .aspectRatio(contentMode: .fit)
+            HStack{
+                HStack(spacing: 10.0){
+                    Image("LoveActive")
+                    Image("DirectMessage")
+                }
+                Spacer()
+                Image("Bookmark")
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 9)
+        }
     }
 }
