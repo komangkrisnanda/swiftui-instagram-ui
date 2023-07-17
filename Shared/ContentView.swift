@@ -11,11 +11,15 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0.0){
             Header()
-            Stories()
-            Divider()
-            PostHeader()
-            PostContent()
-            Spacer()
+            
+            ScrollView(.vertical, showsIndicators: false){
+                Stories()
+                Divider()
+                Post(img: "Avatar1", description: "If you want a loyal friend, get a dog. If you want a mysterious companion, get a cat.")
+                Post(img: "Avatar2", description: "Cats are like tiny furry philosophers.")
+                Post(img: "Avatar3", description: "Cats are the reason why I believe in magic.")
+            }
+            
         }
     }
 }
@@ -111,9 +115,10 @@ struct PostHeader: View {
 }
 
 struct PostContent: View {
+    var img: String = ""
     var body: some View {
         VStack {
-            Image("Avatar1")
+            Image(img)
                 .resizable()
                 .frame(width: .infinity)
                 .aspectRatio(contentMode: .fit)
@@ -127,6 +132,52 @@ struct PostContent: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 9)
+        }
+    }
+}
+
+struct Post: View {
+    var img: String = "Avatar1"
+    var description: String = ""
+    var body: some View {
+        VStack(alignment: .leading,spacing: 0.0) {
+            PostHeader()
+            PostContent(img: img)
+            Text("Liked by Edith, Hayabusa and others")
+                .font(.footnote)
+                .frame(width: .infinity)
+                .padding(.horizontal, 12)
+            
+            Text(description)
+                .font(.footnote)
+                .frame(width: .infinity)
+                .padding(.horizontal, 12)
+            
+            HStack{
+                HStack(spacing: 7.0){
+                    Image("Avatar1")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .cornerRadius(50)
+                    
+                    Text("Add comment...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 9)
+                
+                Spacer()
+                
+                HStack{
+                    Text("😍")
+                    Text("😂")
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 9)
+            }
         }
     }
 }
